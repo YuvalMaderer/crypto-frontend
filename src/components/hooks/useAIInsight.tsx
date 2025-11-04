@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const OPENROUTER_API_KEY =
-  "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"; // עדיף להכניס ל-.env
+const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 
 export const useAIInsight = () => {
   const [insight, setInsight] = useState<string | null>(null);
