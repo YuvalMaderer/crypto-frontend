@@ -269,10 +269,6 @@ const Dashboard = () => {
               </div>
             </CardHeader>
             <CardContent>
-              {/* TODO: Replace with dynamic meme
-                  Option 1: Scrape r/CryptoCurrency or r/CryptoMemes
-                  Option 2: Use static JSON array of meme URLs
-                  Rotate based on date or random selection */}
               <img
                 src={mockMeme}
                 alt="Crypto meme"
