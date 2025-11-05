@@ -22,9 +22,11 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
       toast({
@@ -59,6 +61,7 @@ const Signup = () => {
         });
       }
     } catch (err) {
+      setIsLoading(false);
       toast({
         title: "Signup failed",
         description: err.response?.data?.message || err.message,
@@ -146,8 +149,14 @@ const Signup = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full glow-primary">
-                Create Account
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className={`w-full glow-primary transition-all ${
+                  isLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                {isLoading ? "Creating..." : "Create Account"}
               </Button>
 
               <div className="text-center text-sm">

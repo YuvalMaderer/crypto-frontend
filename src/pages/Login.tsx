@@ -20,9 +20,11 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const { data } = await api.post("/api/auth/login", formData);
@@ -37,9 +39,11 @@ const Login = () => {
         });
       }
     } catch (err) {
+      setIsLoading(false);
       toast({
         title: "Login failed",
         description: err.response?.data?.message || err.message,
+        variant: "destructive",
       });
     }
   };
@@ -93,8 +97,14 @@ const Login = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full glow-primary">
-                Login
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className={`w-full glow-primary transition-all ${
+                  isLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                {isLoading ? "Loading..." : "Login"}
               </Button>
 
               <div className="text-center text-sm">
